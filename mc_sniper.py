@@ -73,12 +73,12 @@ def input_str(prompt: str) -> str:
     return value
 
 
-def input_int(prompt: str, default: int) -> int:
+def input_float(prompt: str, default: float) -> float:
     raw = input(prompt).strip()
     if not raw:
         return default
     try:
-        return int(raw)
+        return float(raw)
     except ValueError:
         print(f"  輸入無效，使用預設值 {default}")
         return default
@@ -118,7 +118,7 @@ def main():
 
     token       = input_str("Bearer Token：")
     target_name = input_str("目標使用者名稱：")
-    interval    = input_int("嘗試間隔（秒，預設 10）：", default=10)
+    interval    = input_float("嘗試間隔（秒，預設 10，可輸入小數如 0.5）：", default=10)
     start_dt    = input_time("開始時間（格式 2026-05-01 08:00:00，直接 Enter = 立即）：")
     end_dt      = input_time("結束時間（格式 2026-05-01 10:00:00，直接 Enter = 不限制）：")
 
