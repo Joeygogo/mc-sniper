@@ -28,6 +28,14 @@ def get_current_name(token: str) -> str:
     resp = requests.get(MC_PROFILE_URL, headers=auth_headers(token))
     if resp.status_code == 401:
         sys.exit("Bearer Token 無效或已過期，請重新取得。")
+    if resp.status_code == 403:
+        sys.exit(
+            "403 Forbidden：Token 被拒絕。\n"
+            "可能原因：\n"
+            "  1. 此帳號未購買 Minecraft Java Edition\n"
+            "  2. Token 格式錯誤（確認只貼 token 本身，不含 'Bearer ' 前綴）\n"
+            f"  回應內容：{resp.text}"
+        )
     resp.raise_for_status()
     return resp.json().get("name", "unknown")
 
