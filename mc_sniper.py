@@ -183,4 +183,8 @@ def main():
 
 
 if __name__ == "__main__":
-    main()
+    try:
+        main()
+    except Exception as e:
+        print(f"\n[錯誤] {e}")
+    input("\n按 Enter 關閉視窗...")
