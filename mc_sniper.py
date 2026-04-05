@@ -137,7 +137,11 @@ def main():
     print(f"  結束時間    : {end_dt or '無限制'}")
     print("=" * 55)
 
-    print("驗證 Bearer Token...")
+    # 自動去除意外帶入的前綴
+    if token.lower().startswith("bearer "):
+        token = token[7:].strip()
+
+    print(f"驗證 Bearer Token（前20碼：{token[:20]}...）")
     current = get_current_name(token)
     print(f"目前帳號名稱：{current}\n")
 
